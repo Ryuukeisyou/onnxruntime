@@ -40,17 +40,17 @@ class GridSample final : public OpKernel {
       }
     }
 
-    std::string padding_mode_str = info.GetAttrOrDefault<std::string>("padding_mode", "zeros");
+   std::string padding_mode_str = info.GetAttrOrDefault<std::string>("padding_mode", "zeros");
     align_corners_ = static_cast<bool>(info.GetAttrOrDefault<int64_t>("align_corners", 0));
-    if (padding_mode_str == "reflection") {
+   if (padding_mode_str == "reflection") {
       padding_mode_ = Reflection;
-    } else if (padding_mode_str == "border") {
+   } else if (padding_mode_str == "border") {
       padding_mode_ = Border;
-    } else if (padding_mode_str == "zeros") {
+   } else if (padding_mode_str == "zeros") {
       padding_mode_ = Zeros;
-    } else {
-      ORT_THROW("padding_mode \"", padding_mode_str, "\" not supported, expect zeros, border or reflection");
-    }
+   } else {
+     ORT_THROW("padding_mode \"", padding_mode_str, "\" not supported, expect zeros, border or reflection");
+   }
   }
 
   Status Compute(OpKernelContext* context) const override;
@@ -58,8 +58,8 @@ class GridSample final : public OpKernel {
  private:
   typedef enum {
     Linear,
-    Cubic,
     Nearest,
+    Cubic,
   } GridSampleInterpolationMode;
 
   enum GridSamplePaddingMode {
